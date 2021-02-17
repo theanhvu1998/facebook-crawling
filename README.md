@@ -16,7 +16,7 @@
 
 ### I. Install library:
 
-> **pip install -r requirement.txt**
+        pip install -r requirement.txt
 
 -   [Helium](https://github.com/mherrmann/selenium-python-helium): a wrapper around [Selenium](https://selenium-python.readthedocs.io/) with more high-level API for web automation
 -   [HTTP Request Randomizer](https://github.com/pgaref/HTTP_Request_Randomizer): used for getting proxies from [Free Proxy List](https://free-proxy-list.net/)
@@ -25,52 +25,55 @@
 
 1.  **Running Browser**:
 
--   **PAGE_URL**: url of Facebook page
--   **TOR_PATH**: use proxy with Tor with `WINDOWS` / `MAC` / `LINUX` / `NONE`:
--   **BROWSER_OPTIONS**: run scripts using `CHROME` / `FIREFOX`
--   **USE_PROXY**: run with proxy or not. If **True** &rarr; Check:
-    -   IF **TOR_PATH** &ne; `NONE` &rarr; Use Tor's SOCKS proxy server
-    -   ELSE &rarr; Get proxies from [Free Proxy List](https://free-proxy-list.net/)
--   **HEADLESS**: run with header Browser or not
--   **SPEED_UP**: simplify Browser for minizing loading time:
+    -   **PAGE_URL**: url of Facebook page
+    -   **TOR_PATH**: use proxy with Tor with `WINDOWS` / `MAC` / `LINUX` / `NONE`:
+    -   **BROWSER_OPTIONS**: run scripts using `CHROME` / `FIREFOX`
+    -   **USE_PROXY**: run with proxy or not. If **True** &rarr; Check:
+        -   IF **TOR_PATH** &ne; `NONE` &rarr; Use Tor's SOCKS proxy server
+        -   ELSE &rarr; Get proxies from [Free Proxy List](https://free-proxy-list.net/)
+    -   **HEADLESS**: run with header Browser or not
+    -   **SPEED_UP**: simplify Browser for minizing loading time:
 
-    -   With **Chrome** :
+        -   With **Chrome** :
 
-    ```python
-        # Prevent Selenium detection => navigator.driver = undefined (check in dev tools)
-        browser_options.add_argument("--disable-blink-features=AutomationControlled")
+        ```python
+            # Prevent Selenium detection
+            # Check navigator.driver in dev tools. It must be undefined
+            browser_options.add_argument("--disable-blink-features=AutomationControlled")
+        ```
 
-        # Disable loading image, CSS, ...
-        browser_options.add_experimental_option('prefs', {
-            "profile.managed_default_content_settings.images": 2,
-            "profile.managed_default_content_settings.stylesheets": 2,
-            "profile.managed_default_content_settings.cookies": 2,
-            "profile.managed_default_content_settings.geolocation": 2,
-            "profile.managed_default_content_settings.media_stream": 2,
-            "profile.managed_default_content_settings.plugins": 1,
-            "profile.default_content_setting_values.notifications": 2,
-        })
-    ```
+        ```python
+            # Disable loading image, CSS, ...
+            browser_options.add_experimental_option('prefs', {
+                "profile.managed_default_content_settings.images": 2,
+                "profile.managed_default_content_settings.stylesheets": 2,
+                "profile.managed_default_content_settings.cookies": 2,
+                "profile.managed_default_content_settings.geolocation": 2,
+                "profile.managed_default_content_settings.media_stream": 2,
+                "profile.managed_default_content_settings.plugins": 1,
+                "profile.default_content_setting_values.notifications": 2,
+            })
+        ```
 
-    -   With **Firefox** :
+        -   With **Firefox** :
 
-    ```python
-        # Disable loading image, CSS, Flash
-        browser_options.set_preference('permissions.default.image', 2)
-        browser_options.set_preference('permissions.default.stylesheet', 2)
-        browser_options.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
-    ```
+        ```python
+            # Disable loading image, CSS, Flash
+            browser_options.set_preference('permissions.default.image', 2)
+            browser_options.set_preference('permissions.default.stylesheet', 2)
+            browser_options.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
+        ```
 
 2.  **Loading Page**:
 
--   **SCROLL_DOWN**: number of scroll times for loading more posts
--   **FILTER_CMTS_BY**: show comments by `MOST_RELEVANT` / `NEWEST` / `ALL_COMMENTS`
--   **VIEW_MORE_CMTS**: number of times for loading more comments
--   **VIEW_MORE_REPLIES**: number of times for loading more replies
+    -   **SCROLL_DOWN**: number of scroll times for loading more posts
+    -   **FILTER_CMTS_BY**: show comments by `MOST_RELEVANT` / `NEWEST` / `ALL_COMMENTS`
+    -   **VIEW_MORE_CMTS**: number of times for loading more comments
+    -   **VIEW_MORE_REPLIES**: number of times for loading more replies
 
 ### III. Start crawling:
 
-> **python crawler.py**
+        python crawler.py
 
 -   Sign out Facebook (cause some CSS Selectors will be different as sign in)
 -   Note that with some proxies:
