@@ -37,31 +37,30 @@
         -   With **Chrome** :
 
         ```python
-            # Prevent Selenium detection
-            # Check navigator.driver in dev tools. It must be undefined
-            browser_options.add_argument("--disable-blink-features=AutomationControlled")
+        # Prevent Selenium detection => navigator.driver = undefined (Check in dev tools)
+        browser_options.add_argument("--disable-blink-features=AutomationControlled")
         ```
 
         ```python
-            # Disable loading image, CSS, ...
-            browser_options.add_experimental_option('prefs', {
-                "profile.managed_default_content_settings.images": 2,
-                "profile.managed_default_content_settings.stylesheets": 2,
-                "profile.managed_default_content_settings.cookies": 2,
-                "profile.managed_default_content_settings.geolocation": 2,
-                "profile.managed_default_content_settings.media_stream": 2,
-                "profile.managed_default_content_settings.plugins": 1,
-                "profile.default_content_setting_values.notifications": 2,
-            })
+        # Disable loading image, CSS, ...
+        browser_options.add_experimental_option('prefs', {
+            "profile.managed_default_content_settings.images": 2,
+            "profile.managed_default_content_settings.stylesheets": 2,
+            "profile.managed_default_content_settings.cookies": 2,
+            "profile.managed_default_content_settings.geolocation": 2,
+            "profile.managed_default_content_settings.media_stream": 2,
+            "profile.managed_default_content_settings.plugins": 1,
+            "profile.default_content_setting_values.notifications": 2,
+        })
         ```
 
         -   With **Firefox** :
 
         ```python
-            # Disable loading image, CSS, Flash
-            browser_options.set_preference('permissions.default.image', 2)
-            browser_options.set_preference('permissions.default.stylesheet', 2)
-            browser_options.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
+        # Disable loading image, CSS, Flash
+        browser_options.set_preference('permissions.default.image', 2)
+        browser_options.set_preference('permissions.default.stylesheet', 2)
+        browser_options.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
         ```
 
 2.  **Loading Page**:
@@ -73,14 +72,10 @@
 
 ### III. Start crawling:
 
-👉 **`python crawler.py`**
+👉 `python crawler.py`
 
 -   Sign out Facebook (cause some CSS Selectors will be different as sign in)
--   Note that with some proxies:
-
-    -   It might be quite slow
-    -   Facebook will require to sign in
-
+-   Note that with some proxies, it might be quite slow or required to sign in
 -   Each post will be written line by line when completed. Data Field:
 
     ```json
@@ -119,25 +114,25 @@
 1. With [Free Proxy List](https://free-proxy-list.net/):
 
 ```python
-    from browser import *
-    page_url = 'http://check.torproject.org'
-    request_proxy = RequestProxy()
-    browser_options = BROWSER_OPTIONS.FIREFOX
+from browser import *
+page_url = 'http://check.torproject.org'
+request_proxy = RequestProxy()
+browser_options = BROWSER_OPTIONS.FIREFOX
 
-    setup_free_proxy(page_url, request_proxy, browser_options)
-    # kill_browser()
+setup_free_proxy(page_url, request_proxy, browser_options)
+# kill_browser()
 ```
 
 2. With [Tor Relays](https://github.com/18520339/facebook-crawling/tree/master/tor):
 
 ```python
-    from browser import *
-    page_url = 'http://check.torproject.org'
-    tor_path = TOR_PATH.WINDOWS
-    browser_options = BROWSER_OPTIONS.FIREFOX
+from browser import *
+page_url = 'http://check.torproject.org'
+tor_path = TOR_PATH.WINDOWS
+browser_options = BROWSER_OPTIONS.FIREFOX
 
-    setup_tor_proxy(page_url, tor_path, browser_options)
-    # kill_browser()
+setup_tor_proxy(page_url, tor_path, browser_options)
+# kill_browser()
 ```
 
 ![](https://github.com/18520339/facebook-crawling/blob/master/test_proxy.png?raw=true)
