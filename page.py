@@ -1,6 +1,5 @@
 from browser import *
 
-
 POSTS_SELECTOR = '[class="_427x"] .userContentWrapper'
 COMMENTABLE_SELECTOR = POSTS_SELECTOR + ' .commentable_item'
 FILTER_CMTS = type('Enum', (), {

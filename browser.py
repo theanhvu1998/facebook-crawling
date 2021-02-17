@@ -8,7 +8,6 @@ import psutil
 import shutil
 import random
 
-
 TOR_FOLDER = os.path.join(os.getcwd(), 'tor')
 TOR_PATH = type('Enum', (), {
     'WINDOWS': os.path.join(TOR_FOLDER, 'windows', 'tor.exe'),

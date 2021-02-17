@@ -26,7 +26,7 @@
 1.  **Running Browser**:
 
     -   **PAGE_URL**: url of Facebook page
-    -   **TOR_PATH**: use proxy with Tor with `WINDOWS` / `MAC` / `LINUX` / `NONE`:
+    -   **TOR_PATH**: use proxy with Tor for `WINDOWS` / `MAC` / `LINUX` / `NONE`:
     -   **BROWSER_OPTIONS**: run scripts using `CHROME` / `FIREFOX`
     -   **USE_PROXY**: run with proxy or not. If **True** &rarr; Check:
         -   IF **TOR_PATH** &ne; `NONE` &rarr; Use Tor's SOCKS proxy server

@@ -3,7 +3,6 @@ import page
 import re
 import json
 
-
 PAGE_URL = 'https://www.facebook.com/KTXDHQGConfessions/'
 TOR_PATH = browser.TOR_PATH.NONE
 BROWSER_OPTIONS = browser.BROWSER_OPTIONS.FIREFOX
@@ -39,7 +38,6 @@ def get_comment_info(comment):
         user_url = cmt_url.split('?')[0]
         user_id = user_url.split('https://www.facebook.com/')[-1].replace('/', '')
         user_name = get_child_attribute(comment, '._6qw4', 'innerText')
-
     return {
         'id': cmt_id,
         'utime': utime,
