@@ -89,7 +89,10 @@ def setup_tor_proxy(page_url, tor_path=TOR_PATH.WINDOWS, browser_options=BROWSER
         return start_firefox(page_url, headless=headless, options=browser_options)
 
 
-def setup_driver(page_url, tor_path=TOR_PATH.WINDOWS, browser_options=BROWSER_OPTIONS.FIREFOX, use_proxy=False, private=False, speed_up=False, headless=False):
+def setup_driver(
+    page_url, tor_path=TOR_PATH.WINDOWS, browser_options=BROWSER_OPTIONS.FIREFOX, 
+    use_proxy=False, private=False, speed_up=False, headless=False
+):
     if private: browser_options = hidden(browser_options)
     if speed_up: browser_options = simplify(browser_options)
 
@@ -106,8 +109,7 @@ def setup_driver(page_url, tor_path=TOR_PATH.WINDOWS, browser_options=BROWSER_OP
         request_proxy.set_logger_level(40)
 
         while True:
-            try: 
-                return setup_free_proxy(page_url, request_proxy, browser_options, headless)
+            try: return setup_free_proxy(page_url, request_proxy, browser_options, headless)
             except Exception as e:
                 print('=> Try another proxy.', e)
                 close()

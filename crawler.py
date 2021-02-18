@@ -22,8 +22,7 @@ def get_child_attribute(element, selector, attr):
     try:
         element = element.find_element_by_css_selector(selector)
         return str(element.get_attribute(attr))
-    except:
-        return ''
+    except: return ''
 
 
 def get_comment_info(comment):
