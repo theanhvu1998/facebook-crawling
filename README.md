@@ -31,11 +31,11 @@
     -   **TOR_PATH**: use proxy with Tor for `WINDOWS` / `MAC` / `LINUX` / `NONE`:
     -   **BROWSER_OPTIONS**: run scripts using `CHROME` / `FIREFOX`.
     -   **PRIVATE**: run with private mode:
-        -   Prevent [Selenium](https://selenium-python.readthedocs.io/) detection => Can be checked in Dev Tools, **navigator.driver** must be _undefined_.
+        -   Prevent [Selenium](https://selenium-python.readthedocs.io/) detection &#10153; **navigator.driver** must be _undefined_ (check in Dev Tools).
         -   Start Browser with **Incognito** / **Private Window**.
-    -   **USE_PROXY**: run with proxy or not. If **True** => check:
-        -   IF **TOR_PATH** &ne; `NONE` => Use Tor's SOCKS proxy server.
-        -   ELSE => Get proxies from [Free Proxy List](https://free-proxy-list.net/).
+    -   **USE_PROXY**: run with proxy or not. If **True** &#10153; check:
+        -   IF **TOR_PATH** &ne; `NONE` &#10153; Use Tor's SOCKS proxy server.
+        -   ELSE &#10153; Get proxies from [Free Proxy List](https://free-proxy-list.net/).
     -   **HEADLESS**: run with header Browser or not.
     -   **SPEED_UP**: simplify Browser for minizing loading time:
 
