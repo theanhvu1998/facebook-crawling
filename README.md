@@ -30,9 +30,9 @@
     -   **PAGE_URL**: url of Facebook page
     -   **TOR_PATH**: use proxy with Tor for `WINDOWS` / `MAC` / `LINUX` / `NONE`:
     -   **BROWSER_OPTIONS**: run scripts using `CHROME` / `FIREFOX`
-    -   **PRIVATE**: run with private mode
-        -   Prevent Selenium detection. Check in dev tools: **navigator.driver** (_undefined_)
-        -   Start Browser with Incognito / Private window
+    -   **PRIVATE**: run with private mode:
+        -   Prevent [Selenium](https://selenium-python.readthedocs.io/) detection. Check in dev tools: **navigator.driver** (_undefined_)
+        -   Start Browser with **Incognito** / **Private Window**
     -   **USE_PROXY**: run with proxy or not. If **True** &rarr; Check:
         -   IF **TOR_PATH** &ne; `NONE` &rarr; Use Tor's SOCKS proxy server
         -   ELSE &rarr; Get proxies from [Free Proxy List](https://free-proxy-list.net/)
@@ -113,9 +113,9 @@
 
 1.  Last test on **Firefox** with **Incognito** mode using [Free Proxy List](https://free-proxy-list.net/)
 
-![](https://github.com/18520339/facebook-crawling/blob/master/image/result.png?raw=true)
+    ![](https://github.com/18520339/facebook-crawling/blob/master/image/result.png?raw=true)
 
-2. Running Proxy Server with [Free Proxy List](https://free-proxy-list.net/):
+2.  Running Proxy Server with [Free Proxy List](https://free-proxy-list.net/):
 
 ```python
 from browser import *
