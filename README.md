@@ -7,7 +7,9 @@
 -   Get information of posts
 -   Filter comments
 -   Not required sign in
--   Simplfy browser to minimize time complexity
+-   Check redirect
+-   Run with Incognito window
+-   Simplify browser to minimize time complexity
 -   Use proxies to prevent from banning with:
     -   Random proxies from [Free Proxy List](https://free-proxy-list.net/) that are just checked and updated every 10 minutes
     -   [Tor Relays](https://github.com/18520339/facebook-crawling/tree/master/tor) which used in [Tor Browser](https://www.torproject.org/), a network is comprised of thousands of volunteer-run servers
@@ -28,6 +30,9 @@
     -   **PAGE_URL**: url of Facebook page
     -   **TOR_PATH**: use proxy with Tor for `WINDOWS` / `MAC` / `LINUX` / `NONE`:
     -   **BROWSER_OPTIONS**: run scripts using `CHROME` / `FIREFOX`
+    -   **PRIVATE**: run with private mode
+        -   Prevent Selenium detection. Check in dev tools: **navigator.driver** (_undefined_)
+        -   Start Browser with Incognito / Private window
     -   **USE_PROXY**: run with proxy or not. If **True** &rarr; Check:
         -   IF **TOR_PATH** &ne; `NONE` &rarr; Use Tor's SOCKS proxy server
         -   ELSE &rarr; Get proxies from [Free Proxy List](https://free-proxy-list.net/)
@@ -35,11 +40,6 @@
     -   **SPEED_UP**: simplify Browser for minizing loading time:
 
         -   With **Chrome** :
-
-        ```python
-        # Prevent Selenium detection => navigator.driver = undefined (Check in dev tools)
-        browser_options.add_argument("--disable-blink-features=AutomationControlled")
-        ```
 
         ```python
         # Disable loading image, CSS, ...
@@ -72,7 +72,7 @@
 
 ### III. Start crawling:
 
-👉 `python crawler.py`
+👉 **`python crawler.py`**
 
 -   Sign out Facebook (cause some CSS Selectors will be different as sign in)
 -   Note that with some proxies, it might be quite slow or required to sign in
@@ -109,9 +109,13 @@
     }
     ```
 
-## Test Proxy Server:
+## Testing:
 
-1. With [Free Proxy List](https://free-proxy-list.net/):
+1.  Last test on **Firefox** with **Incognito** mode using [Free Proxy List](https://free-proxy-list.net/)
+
+![](https://github.com/18520339/facebook-crawling/blob/master/image/result.png?raw=true)
+
+2. Running Proxy Server with [Free Proxy List](https://free-proxy-list.net/):
 
 ```python
 from browser import *
@@ -123,7 +127,7 @@ setup_free_proxy(page_url, request_proxy, browser_options)
 # kill_browser()
 ```
 
-2. With [Tor Relays](https://github.com/18520339/facebook-crawling/tree/master/tor):
+3. Running Proxy Server with [Tor Relays](https://github.com/18520339/facebook-crawling/tree/master/tor):
 
 ```python
 from browser import *
@@ -135,4 +139,4 @@ setup_tor_proxy(page_url, tor_path, browser_options)
 # kill_browser()
 ```
 
-![](https://github.com/18520339/facebook-crawling/blob/master/test_proxy.png?raw=true)
+![](https://github.com/18520339/facebook-crawling/blob/master/image/proxy.png?raw=true)

@@ -22,9 +22,19 @@ BROWSER_OPTIONS = type('Enum', (), {
 })
 
 
+def hidden(browser_options=BROWSER_OPTIONS.FIREFOX):
+    if type(browser_options) == ChromeOptions:
+        browser_options.add_argument('--incognito')
+        browser_options.add_argument('--disable-blink-features=AutomationControlled')
+    elif type(browser_options) == FirefoxOptions:
+        browser_options.add_argument('--private') 
+        browser_options.set_preference("dom.webdriver.enabled", False)
+        browser_options.set_preference('useAutomationExtension', False)
+    return browser_options
+
+
 def simplify(browser_options=BROWSER_OPTIONS.FIREFOX):
     if type(browser_options) == ChromeOptions:
-        browser_options.add_argument("--disable-blink-features=AutomationControlled")
         browser_options.add_experimental_option('prefs', {
             "profile.managed_default_content_settings.images": 2,
             "profile.managed_default_content_settings.stylesheets": 2,
@@ -34,19 +44,14 @@ def simplify(browser_options=BROWSER_OPTIONS.FIREFOX):
             "profile.managed_default_content_settings.plugins": 1,
             "profile.default_content_setting_values.notifications": 2,
         })
-    elif type(browser_options) == FirefoxOptions:    
+    elif type(browser_options) == FirefoxOptions:
         browser_options.set_preference('permissions.default.image', 2)
         browser_options.set_preference('permissions.default.stylesheet', 2)
         browser_options.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
     return browser_options
 
 
-def setup_free_proxy(
-    page_url, 
-    request_proxy,
-    browser_options = BROWSER_OPTIONS.FIREFOX, 
-    headless = False
-):
+def setup_free_proxy(page_url, request_proxy, browser_options=BROWSER_OPTIONS.FIREFOX, headless=False):
     proxies = request_proxy.get_proxy_list()
     proxy_server = random.choice(proxies).get_address()
     print('Current Free Proxy:', proxy_server)
@@ -68,12 +73,7 @@ def setup_free_proxy(
         return start_firefox(page_url, headless=headless, options=browser_options)
 
 
-def setup_tor_proxy(
-    page_url, 
-    tor_path = TOR_PATH.WINDOWS, 
-    browser_options = BROWSER_OPTIONS.FIREFOX, 
-    headless = False
-):
+def setup_tor_proxy(page_url, tor_path=TOR_PATH.WINDOWS, browser_options=BROWSER_OPTIONS.FIREFOX, headless=False):
     torBrowser = os.popen(tor_path)
     print('Go to page', page_url)
 
@@ -89,15 +89,10 @@ def setup_tor_proxy(
         return start_firefox(page_url, headless=headless, options=browser_options)
 
 
-def setup_driver(
-    page_url, 
-    tor_path = TOR_PATH.WINDOWS, 
-    browser_options = BROWSER_OPTIONS.FIREFOX, 
-    use_proxy = False,
-    speed_up = False, 
-    headless = False
-):
+def setup_driver(page_url, tor_path=TOR_PATH.WINDOWS, browser_options=BROWSER_OPTIONS.FIREFOX, use_proxy=False, private=False, speed_up=False, headless=False):
+    if private: browser_options = hidden(browser_options)
     if speed_up: browser_options = simplify(browser_options)
+
     if not use_proxy:
         print('Go to page', page_url)
         if type(browser_options) == ChromeOptions: 
@@ -114,7 +109,7 @@ def setup_driver(
             try: 
                 return setup_free_proxy(page_url, request_proxy, browser_options, headless)
             except Exception as e:
-                print('=> Try other proxy.', e)
+                print('=> Try another proxy.', e)
                 close()
 
     print("Use Tor's SOCKS proxy server")
