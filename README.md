@@ -18,7 +18,7 @@
 
 ### I. Install library:
 
-👉 **`pip install -r requirement.txt`**
+    pip install -r requirement.txt
 
 -   [Helium](https://github.com/mherrmann/selenium-python-helium): a wrapper around [Selenium](https://selenium-python.readthedocs.io/) with more high-level API for web automation
 -   [HTTP Request Randomizer](https://github.com/pgaref/HTTP_Request_Randomizer): used for getting proxies from [Free Proxy List](https://free-proxy-list.net/)
@@ -72,7 +72,7 @@
 
 ### III. Start crawling:
 
-👉 **`python crawler.py`**
+    python crawler.py
 
 -   Sign out Facebook (cause some CSS Selectors will be different as sign in)
 -   Note that with some proxies, it might be quite slow or required to sign in
@@ -115,7 +115,7 @@
 
     ![](https://github.com/18520339/facebook-crawling/blob/master/image/result.png?raw=true)
 
-2.  Running Proxy Server with [Free Proxy List](https://free-proxy-list.net/):
+2.  Running **Proxy Server** with [Free Proxy List](https://free-proxy-list.net/):
 
 ```python
 from browser import *
@@ -127,7 +127,7 @@ setup_free_proxy(page_url, request_proxy, browser_options)
 # kill_browser()
 ```
 
-3. Running Proxy Server with [Tor Relays](https://github.com/18520339/facebook-crawling/tree/master/tor):
+3. Running **Proxy Server** with [Tor Relays](https://github.com/18520339/facebook-crawling/tree/master/tor):
 
 ```python
 from browser import *
