@@ -49,17 +49,25 @@ def get_comment_info(comment):
 
 
 while True:
-    driver = browser.setup_driver(PAGE_URL, TOR_PATH, BROWSER_OPTIONS, USE_PROXY, PRIVATE, SPEED_UP, HEADLESS)
-    if PAGE_URL in driver.current_url: break
-    print('Redirect detected => Rerun\n')
+    driver = browser.setup_driver(
+        PAGE_URL, TOR_PATH, BROWSER_OPTIONS, 
+        USE_PROXY, PRIVATE, SPEED_UP, HEADLESS
+    )
+    if driver.current_url in PAGE_URL: 
+        if page.load(
+            driver, PAGE_URL, SCROLL_DOWN, FILTER_CMTS_BY, 
+            VIEW_MORE_CMTS, VIEW_MORE_REPLIES
+        ): break
+    else: print(f"Redirect detected => {'Rerun' if USE_PROXY else 'Please use proxy'}\n")
     driver.close()
 
-page.load(driver, SCROLL_DOWN, FILTER_CMTS_BY, VIEW_MORE_CMTS, VIEW_MORE_REPLIES)
-html_posts = driver.find_elements_by_css_selector(page.POSTS_SELECTOR)
-print('Start crawling', len(html_posts), 'posts...')
 
+html_posts = driver.find_elements_by_css_selector(page.POSTS_SELECTOR)
+file_name = re.findall('\.com/(.*)', PAGE_URL)[0].split('/')[0]
 total = 0
-with open('data.json', 'w', encoding='utf-8') as file:
+
+print('Start crawling', len(html_posts), 'posts...')
+with open(f'{file_name}.json', 'w', encoding='utf-8') as file:
     for post in html_posts:
         post_url = get_child_attribute(post, '._5pcq', 'href').split('?')[0]
         post_id = re.findall('\d+', post_url)[-1]

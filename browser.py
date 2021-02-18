@@ -21,6 +21,10 @@ BROWSER_OPTIONS = type('Enum', (), {
     'FIREFOX': FirefoxOptions()
 })
 
+request_proxy = RequestProxy()
+request_proxy.set_logger_level(40)
+proxies = request_proxy.get_proxy_list()
+
 
 def hidden(browser_options=BROWSER_OPTIONS.FIREFOX):
     if type(browser_options) == ChromeOptions:
@@ -51,17 +55,16 @@ def simplify(browser_options=BROWSER_OPTIONS.FIREFOX):
     return browser_options
 
 
-def setup_free_proxy(page_url, request_proxy, browser_options=BROWSER_OPTIONS.FIREFOX, headless=False):
-    proxies = request_proxy.get_proxy_list()
+def setup_free_proxy(page_url, browser_options=BROWSER_OPTIONS.FIREFOX, headless=False):
     proxy_server = random.choice(proxies).get_address()
-    print('Current Free Proxy:', proxy_server)
+    print('Current proxy server:', proxy_server)
 
     host = proxy_server.split(':')[0]
     port = int(proxy_server.split(':')[1])
     print('Go to page', page_url)
 
     if type(browser_options) == ChromeOptions:
-        browser_options.add_argument('--proxy-server=' + proxy_server)
+        browser_options.add_argument(f'--proxy-server={proxy_server}')
         return start_chrome(page_url, headless=headless, options=browser_options)
 
     elif type(browser_options) == FirefoxOptions:
@@ -104,12 +107,10 @@ def setup_driver(
             return start_firefox(page_url, headless=headless, options=browser_options)
 
     if not os.path.isfile(tor_path):
-        print("Get proxies from https://free-proxy-list.net/")
-        request_proxy = RequestProxy()
-        request_proxy.set_logger_level(40)
-
+        print("Use HTTP Request Randomizer proxy server")
         while True:
-            try: return setup_free_proxy(page_url, request_proxy, browser_options, headless)
+            try: 
+                return setup_free_proxy(page_url, browser_options, headless)
             except Exception as e:
                 print('=> Try another proxy.', e)
                 close()
