@@ -51,7 +51,7 @@ def get_comment_info(comment):
 while True:
     driver = browser.setup_driver(PAGE_URL, TOR_PATH, BROWSER_OPTIONS, USE_PROXY, PRIVATE, SPEED_UP, HEADLESS)
     if PAGE_URL in driver.current_url: break
-    print('Redirect detected => Rerun')
+    print('Redirect detected => Rerun\n')
     driver.close()
 
 page.load(driver, SCROLL_DOWN, FILTER_CMTS_BY, VIEW_MORE_CMTS, VIEW_MORE_REPLIES)

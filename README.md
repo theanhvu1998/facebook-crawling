@@ -109,13 +109,9 @@
 }
 ```
 
-## Testing:
+## Test Proxy Server:
 
-1.  Last test on **Firefox** with **Incognito** mode using [Free Proxy List](https://free-proxy-list.net/):
-
-    ![](https://github.com/18520339/facebook-crawling/blob/master/image/result.png?raw=true)
-
-2.  Running **Proxy Server** with [Free Proxy List](https://free-proxy-list.net/):
+1.  With [Free Proxy List](https://free-proxy-list.net/):
 
 ```python
 from browser import *
@@ -127,7 +123,7 @@ setup_free_proxy(page_url, request_proxy, browser_options)
 # kill_browser()
 ```
 
-3. Running **Proxy Server** with [Tor Relays](https://github.com/18520339/facebook-crawling/tree/master/tor):
+2. With [Tor Relays](https://github.com/18520339/facebook-crawling/tree/master/tor):
 
 ```python
 from browser import *
@@ -139,4 +135,4 @@ setup_tor_proxy(page_url, tor_path, browser_options)
 # kill_browser()
 ```
 
-![](https://github.com/18520339/facebook-crawling/blob/master/image/proxy.png?raw=true)
+![](https://github.com/18520339/facebook-crawling/blob/master/test_proxy.png?raw=true)

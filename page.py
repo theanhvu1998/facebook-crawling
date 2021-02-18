@@ -31,7 +31,7 @@ def click_multiple_buttons(driver, selector, sleep):
     '''
     driver.execute_script(js_script)
     while find_all(S(f'{COMMENTABLE_SELECTOR} [role="progressbar"]')) != []: pass
-    time.sleep(sleep)
+    time.sleep(min(sleep, 30))
 
 
 def filter_comments(driver, by, sleep):
