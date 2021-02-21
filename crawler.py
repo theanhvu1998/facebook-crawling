@@ -38,6 +38,7 @@ def get_comment_info(comment):
         user_url = cmt_url.split('?')[0]
         user_id = user_url.split('https://www.facebook.com/')[-1].replace('/', '')
         user_name = get_child_attribute(comment, '._6qw4', 'innerText')
+
     return {
         'id': cmt_id,
         'utime': utime,
@@ -67,7 +68,7 @@ file_name = re.findall('\.com/(.*)', PAGE_URL)[0].split('/')[0]
 total = 0
 
 print('Start crawling', len(html_posts), 'posts...')
-with open(f'{file_name}.json', 'w', encoding='utf-8') as file:
+with open(f'data/{file_name}.json', 'w', encoding='utf-8') as file:
     for post in html_posts:
         post_url = get_child_attribute(post, '._5pcq', 'href').split('?')[0]
         post_id = re.findall('\d+', post_url)[-1]

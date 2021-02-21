@@ -55,10 +55,8 @@ def simplify(browser_options=BROWSER_OPTIONS.FIREFOX):
     return browser_options
 
 
-def setup_free_proxy(page_url, browser_options=BROWSER_OPTIONS.FIREFOX, headless=False):
-    proxy_server = random.choice(proxies).get_address()
+def setup_free_proxy(page_url, proxy_server, browser_options=BROWSER_OPTIONS.FIREFOX, headless=False):
     print('Current proxy server:', proxy_server)
-
     host = proxy_server.split(':')[0]
     port = int(proxy_server.split(':')[1])
     print('Go to page', page_url)
@@ -110,8 +108,11 @@ def setup_driver(
         print("Use HTTP Request Randomizer proxy server")
         while True:
             try: 
-                return setup_free_proxy(page_url, browser_options, headless)
+                rand_proxy = random.choice(proxies)
+                proxy_server = rand_proxy.get_address()
+                return setup_free_proxy(page_url, proxy_server, browser_options, headless)
             except Exception as e:
+                proxies.remove(rand_proxy)
                 print('=> Try another proxy.', e)
                 close()
 
